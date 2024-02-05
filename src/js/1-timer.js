@@ -1,10 +1,10 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const input = document.querySelector('#datetime-picker');
-const startBtn = document.querySelector('button[data-start]');
+const start = document.querySelector('button[data-start]');
 const daysOfTimer = document.querySelector('span[data-days]');
 const hoursOfTimer = document.querySelector('span[data-hours]');
 const minutesOfTimer = document.querySelector('span[data-minutes]');
@@ -26,13 +26,13 @@ const options = {
 
 flatpickr('#datetime-picker', options);
 
-startBtn.addEventListener('click', addTimer);
+start.addEventListener('click', addTimer);
 
 function getUserDate(date) {
   const currentDate = new Date();
 
   if (date <= currentDate) {
-    startBtn.setAttribute('disabled', true);
+    start.setAttribute('disabled', true);
     iziToast.error({
       title: 'Error',
       message: 'Please choose a date in the future',
@@ -40,10 +40,9 @@ function getUserDate(date) {
       backgroundColor: '#EF4040',
       titleColor: '#fff',
       messageColor: '#fff',
-      iconUrl: '../img/icons/bi_x-octagon.svg',
     });
   } else {
-    startBtn.removeAttribute('disabled');
+    start.removeAttribute('disabled');
   }
 }
 
@@ -52,7 +51,7 @@ function addLeadingZero(value) {
 }
 
 function addTimer() {
-  startBtn.setAttribute('disabled', true);
+  start.setAttribute('disabled', true);
   input.setAttribute('disabled', true);
 
   clearInterval(timerInterval);
@@ -66,7 +65,7 @@ function addTimer() {
     if (deltaTime < 0) {
       clearInterval(timerInterval);
       updateTimerInterface({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      startBtn.removeAttribute('disabled');
+      start.removeAttribute('disabled');
       input.removeAttribute('disabled');
       return;
     }
